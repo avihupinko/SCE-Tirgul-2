@@ -39,10 +39,12 @@ class Party(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), index=True, unique=False)
     picture = db.Column(db.String(120), index=True, unique=False)
+    count = db.Column(db.Integer, index=True, unique=False)
 
     def __init__(self, name, picture):
         self.name = name
         self.picture = picture
+        self.count = 0
 
     def get_id(self):
         try:
