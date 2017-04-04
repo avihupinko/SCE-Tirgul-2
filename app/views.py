@@ -39,7 +39,7 @@ def index():
 def login():
     error = None
     if request.method == 'POST':
-
+        # bla bla
         ## Validate user
         id = request.form['id']
         user = User.query.filter_by(id=id).first()
