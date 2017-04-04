@@ -1,13 +1,10 @@
-from flask_babel import gettext
-from flask_wtf import Form, validators
-from wtforms import StringField, BooleanField, TextField
+from flask_wtf import Form
+from wtforms import StringField
 from wtforms.validators import DataRequired
-
-from app.models import User
 
 
 class LoginForm(Form):
-    name = StringField('name', validators=[DataRequired()])
+    id = StringField('id', validators=[DataRequired()])
     first_name = StringField('first_name', validators=[DataRequired()])
     last_name = StringField('last_name', validators=[DataRequired()])
 
@@ -20,8 +17,11 @@ class LoginForm(Form):
     #     if not valid:
     #         return False
     #
-    #     user = User.query.filter_by(first_name=self.first_name.data).first()
+    #     user = User.query.filter_by(id=self.id.data)
     #     if user is not None:
-    #         self.first_name.errors.append(gettext('This nickname is already in use. Please choose another one.'))
-    #         return False
-    #     return True
+    #         if user.first_name==self.first_name.data and user.last_name==self.last_name.data:
+    #             if user.voted=='No':
+    #                 return True;
+    #             return 'The user already voted'
+    #         return 'Wrong data entered. Please choose another one.'
+    #     return 'user not recognized in database. Please choose another one.'
