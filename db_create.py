@@ -4,11 +4,15 @@ from app import db
 from app.models import User, Party
 
 db.drop_all()
+
 db.create_all()
 db.session.commit()
 
 admon = User('tomer', 'admon', '123')
 tomer = User(u'תומר', u'אדמון', '234')
+avihu = User(u'אביהו', u'פינקו', '345')
+yulia = User(u'יוליה', u'זורין', '456')
+daniel = User(u'דניאל', u'אחרק', '567')
 
 avoda = Party(u'העבודה', 'https://www.am-1.org.il/wp-content/uploads/2015/03/%D7%94%D7%A2%D7%91%D7%95%D7%93%D7%94.-%D7%A6%D7%99%D7%9C%D7%95%D7%9D-%D7%99%D7%97%D7%A6.jpg')
 likud = Party(u'הליכוד', 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Likud_Logo.svg/250px-Likud_Logo.svg.png')
@@ -19,6 +23,11 @@ db.session.add(likud)
 db.session.add(lavan)
 db.session.add(admon)
 db.session.add(tomer)
+db.session.add(avihu)
+db.session.add(yulia)
+db.session.add(daniel)
 db.session.commit()
 users = User.query.all()
 print(users)
+# for user in users:
+#     print (user.voted)

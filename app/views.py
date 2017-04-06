@@ -2,11 +2,13 @@
 
 import os
 
+# import easygui
 from flask import render_template, redirect, url_for, request, g
 from flask import send_from_directory
 from flask_login import login_user, logout_user, current_user, login_required
 
 from app import app, login_manager
+from app import db
 from .models import User, Party
 
 
@@ -16,8 +18,13 @@ def load_user(user_id):
 
 
 def validateAndAdd(party_name):
-    ## implement me!
-    pass
+    for party in Party.query.all():
+        if (party.name == party_name):
+            party.count += 1
+    for user in User.query.all():
+        if (user.id == current_user.id):
+            user.voted = True
+    db.session.commit()
 
 
 @app.route('/', methods=['GET'])
@@ -26,11 +33,14 @@ def validateAndAdd(party_name):
 def index():
     if request.method == 'POST':
         validateAndAdd(request.form['party_name'])
-        return redirect(url_for('login'))
+        # easygui.msgbox("תודה ולהתראות", title="תודה, תודה, תודה, תודה")
+        return redirect(url_for('logout'))
+    error = u'הינך מחוייב לבחור באחד מהפתקים'
     g.user = current_user  # global user parameter used by flask framwork
     parties = Party.query.all()  # this is a demo comment
     return render_template('index.html',
                            title='Home',
+                           error=error,
                            user=g.user,
                            parties=parties)
 
@@ -39,19 +49,21 @@ def index():
 def login():
     error = None
     if request.method == 'POST':
-        # bla bla
+
         ## Validate user
         id = request.form['id']
         user = User.query.filter_by(id=id).first()
         if user is not None:
             if user.first_name == request.form['first_name'] and user.last_name == request.form['last_name']:
-                if user.voted == 'No':
+                if user.voted == False:
                     login_user(user)  ## built in 'flask login' method that creates a user session
                     return redirect(url_for('index'))
                 error = u'המצביע מימש את זכותו להצביע'
-            error = u'פרטים שגויים, נסה שוב'
+            else:
+                error = u'פרטים שגויים, נסה שוב'
         else:  ##validation error
             error = u'המצביע אינו מופיע בבסיס הנתונים'
+
     return render_template('login.html', error=error)  ## will handle the logout request
 
 
