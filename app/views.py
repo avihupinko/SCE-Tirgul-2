@@ -33,7 +33,6 @@ def validateAndAdd(party_name):
 def index():
     if request.method == 'POST':
         validateAndAdd(request.form['party_name'])
-        # easygui.msgbox("תודה ולהתראות", title="תודה, תודה, תודה, תודה")
         return redirect(url_for('logout'))
     error = u'הינך מחוייב לבחור באחד מהפתקים'
     g.user = current_user  # global user parameter used by flask framwork
