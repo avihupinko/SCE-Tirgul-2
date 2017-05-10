@@ -15,26 +15,26 @@ class AppTestCase(unittest.TestCase):
 
     def test_cant_access_without_login(self):
         # check if the url of accessing index page without logging in is the same of the login page
-        index_page = self.app.get('/index', follow_redirects=True)
-        return index_page.location == self.app.get('/login', follow_redirects=True)
+        index_page = self.app.get('/index', content_type='application/json')
+        self.assertEqual(index_page.status_code, 302)
 
     def test_false_login(self):
         # check that you can't login without id
-        invalid_login = self.app.post('/login', data={'first_name': 'avihu', 'last_name': 'pinko'},
+        invalid_login = self.app.post('/login', data=dict(first_name='avihu', last_name='pinko'),
                                       follow_redirects=True)
-        return b'Invalid credentials' in invalid_login.data
+        self.assertIn('400 Bad Request', invalid_login.data.decode("utf-8"))
 
     def test_false_user_id(self):
         # check the error of user who's not in the database
-        invalid_login = self.app.post('/login', data={'first_name': 'avihu', 'last_name': 'pinko', 'id': '987'},
+        invalid_login = self.app.post('/login', data=dict(first_name='avihu', last_name='pinko', id='987'),
                                       follow_redirects=True)
-        return u'המצביע אינו מופיע בבסיס הנתונים' in invalid_login.data.decode("utf-8")
+        self.assertIn(u'המצביע אינו מופיע בבסיס הנתונים', invalid_login.data.decode("utf-8"))
 
     def test_false_user_name(self):
         # check the error of wrong name for valid id
-        invalid_login = self.app.post('/login', data={'first_name': 'avihu', 'last_name': 'pinko', 'id': '123'},
+        invalid_login = self.app.post('/login', data=dict(first_name='avihu', last_name='pinko', id='123'),
                                       follow_redirects=True)
-        return u'המצביע אינו מופיע בבסיס הנתונים' in invalid_login.data.decode("utf-8")
+        self.assertIn(u'פרטים שגויים, נסה שוב', invalid_login.data.decode("utf-8"))
 
 
 # Run tests if script was executed directly from the shell
