@@ -41,9 +41,9 @@ class AppTestCase(LiveServerTestCase):
             db.session.remove()
             db.drop_all()
 
-    def test_server_is_up_and_running(self):
-        response = self.app.get(self.get_server_url())
-        self.assertEqual(response.code, 200)
+    # def test_server_is_up_and_running(self):
+    #     response = self.app.get(self.get_server_url())
+    #     self.assertEqual(response.code, 200)
 
     def test_getting_to_voting_page(self):
         firstname = self.browser.find_element_by_name('first_name')
