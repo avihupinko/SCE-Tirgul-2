@@ -17,14 +17,37 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-def validateAndAdd(party_name):
-    for party in Party.query.all():
-        if (party.name == party_name):
-            party.count += 1
+def validate_and_add(party):
+    # for P in Party.query.all():
+    #     if party.name == P.name:
+    #         party.count += 1
+    party.count += 1;
     for user in User.query.all():
-        if (user.id == current_user.id):
+        if user.id == current_user.id:
             user.voted = True
     db.session.commit()
+
+
+@app.route('/confirm/<id>', methods=['GET', 'POST'])
+@login_required
+def confirm_selection(id):
+    party = None
+    Id = int(id)
+    for p in Party.query.all():
+        if p.id == Id:
+            party = p
+            break
+    if request.method == 'POST':
+        if request.form['btn'] == 'אשר':
+            validate_and_add(party)
+            return redirect(url_for('logout'))
+        else:
+            return redirect(url_for('index'))
+    g.user = current_user
+    return render_template('confirm_selection.html',
+                           title='Home',
+                           user=g.user,
+                           party=party)
 
 
 @app.route('/', methods=['GET'])
@@ -32,10 +55,9 @@ def validateAndAdd(party_name):
 @login_required
 def index():
     if request.method == 'POST':
-        validateAndAdd(request.form['party_name'])
-        return redirect(url_for('logout'))
+        return redirect(url_for('confirm_selection', id=request.form['partyId']))
     error = u'הינך מחוייב לבחור באחד מהפתקים'
-    g.user = current_user  # global user parameter used by flask framwork
+    g.user = current_user  # global user parameter used by flask framework
     parties = Party.query.all()  # this is a demo comment
     return render_template('index.html',
                            title='Home',
