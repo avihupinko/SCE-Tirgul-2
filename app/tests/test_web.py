@@ -54,7 +54,7 @@ class AppTestCase(LiveServerTestCase):
         id.send_keys('678')
         self.browser.find_element_by_name("submit").click()
         # check if user where able to enter parties page
-        self.assertIn(u'ברוכים הבאים , yulia zorin', self.browser.find_element_by_tag_name('h1'))
+        self.assertIn('yulia zorin', self.browser.find_element_by_tag_name('h1'))
 
     def test_user_not_in_database(self):
         firstname = self.browser.find_element_by_name('first_name')
