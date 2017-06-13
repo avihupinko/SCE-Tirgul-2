@@ -72,21 +72,22 @@ class AppTestCase(LiveServerTestCase):
         confirm = self.browser.find_element_by_css_selector('submit')
         confirm.send_keys(u'אשר')
         confirm.submit()
+
         assert u'ברוכים הבאים למערכת הבחירות הממוחשבת' in self.browser.page_source
 
+    def test_user_not_in_database(self):
+        firstname = self.browser.find_element_by_name('first_name')
+        firstname.send_keys('yulia')
+        lastname = self.browser.find_element_by_name('last_name')
+        lastname.send_keys('zorin')
+        id = self.browser.find_element_by_name('id')
+        id.send_keys('987')
+        id.send_keys(Keys.ENTER)
+        # self.browser.find_element_by_name("submit").click()
+        # check if user where able to enter parties page
+        assert self.str not in self.browser.page_source
 
-def test_user_not_in_database(self):
-    firstname = self.browser.find_element_by_name('first_name')
-    firstname.send_keys('yulia')
-    lastname = self.browser.find_element_by_name('last_name')
-    lastname.send_keys('zorin')
-    id = self.browser.find_element_by_name('id')
-    id.send_keys('987')
-    id.send_keys(Keys.ENTER)
-    # self.browser.find_element_by_name("submit").click()
-    # check if user where able to enter parties page
-    assert self.str not in self.browser.page_source  # Run tests if script was executed directly from the shell
 
-
+# Run tests if script was executed directly from the shell
 if (__name__ == '__main__'):
     unittest.main()
