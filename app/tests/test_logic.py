@@ -1,17 +1,20 @@
 import unittest
 
-import app
+from app import app, db
 
 
 class AppTestCase(unittest.TestCase):
     def setUp(self):
-        # Create Flask test client
-        self.app = app.app.test_client()
+        self.app_context = app.app_context()
+        self.app_context.push()
+        db.create_all()
+        self.check = app.test_client(self)
 
     def tearDown(self):
-        # Clear the data after each test
-        app.data = {}
-        app.free_id = 0
+        del self.check
+        db.session.remove()
+        db.drop_all()
+        self.app_context.pop()
 
     def test_cant_access_without_login(self):
         # check if the url of accessing index page without logging in is the same of the login page
