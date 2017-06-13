@@ -2,6 +2,7 @@ import unittest
 
 from flask_testing import LiveServerTestCase
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 from app import app, db
 from app.models import User, Party
@@ -50,7 +51,8 @@ class AppTestCase(LiveServerTestCase):
         lastname.send_keys('zorin')
         id = self.browser.find_element_by_name('id')
         id.send_keys('678')
-        self.browser.find_element_by_name("submit").click()
+        id.send_keys(Keys.ENTER)
+        # self.browser.find_element_by_name("submit").click()
         assert self.str not in self.browser.page_source
 
 
@@ -61,7 +63,8 @@ class AppTestCase(LiveServerTestCase):
         lastname.send_keys('zorin')
         id = self.browser.find_element_by_name('id')
         id.send_keys('987')
-        self.browser.find_element_by_name("submit").click()
+        id.send_keys(Keys.ENTER)
+        # self.browser.find_element_by_name("submit").click()
         # check if user where able to enter parties page
         assert self.str not in self.browser.page_source
 

@@ -31,7 +31,7 @@ class AppTestCase(unittest.TestCase):
 
     def test_false_user_id(self):
         # check the error of user who's not in the database
-        invalid_login = self.app.post('/login', data=dict(first_name='avihu', last_name='pinko', id='987'))
+        invalid_login = self.app.post('login', data=dict(first_name='avihu', last_name='pinko', id='987'))
         str = invalid_login.data.decode('utf-8')
         assert '×”×ž×¦×‘×™×¢ ××™× ×• ×ž×•×¤×™×¢ ×‘×‘×¡×™×¡ ×”× ×ª×•× ×™× ××• ×©×›×‘×¨ ×”×¦×‘×™×¢' in str
 
