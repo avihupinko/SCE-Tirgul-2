@@ -64,7 +64,7 @@ class AppTestCase(LiveServerTestCase):
         id.send_keys(Keys.ENTER)
         assert u'לצורך הצבעה, בחר את המפלגה הרצויה' in self.browser.page_source
         # select party
-        self.browser.find_element_by_name('partyId')[0].click()
+        self.browser.find_element_by_css_selector("input[value=" + str(self.yarok.get_id()) + "]").click()
         assert u'האם ברצונך לאשר את הצבעתך' in self.browser.page_source
 
         # confirm selected party
