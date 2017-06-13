@@ -1,6 +1,5 @@
 import unittest
 
-from flask_login import current_user
 from flask_testing import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -71,7 +70,7 @@ class AppTestCase(LiveServerTestCase):
 
         confirm = self.browser.find_element_by_id('ok')
         confirm.click()
-        assert None in current_user
+        assert u'ברוכים הבאים למערכת הבחירות הממוחשבת' in self.browser.page_source
 
 
     def test_user_not_in_database(self):
