@@ -24,10 +24,10 @@ class AppTestCase(LiveServerTestCase):
 
     def insert_data_to_db(self):
         db.session.commit()
-        yulia = User('yulia', 'zorin', '678')
-        yarok = Party(u'עלה ירוק', 'https://pbs.twimg.com/profile_images/553476099775016960/8Ha40Qym_400x400.jpeg')
-        db.session.add(yarok)
-        db.session.add(yulia)
+        self.yulia = User('yulia', 'zorin', '678')
+        self.yarok = Party(u'עלה ירוק', 'https://pbs.twimg.com/profile_images/553476099775016960/8Ha40Qym_400x400.jpeg')
+        db.session.add(self.yarok)
+        db.session.add(self.yulia)
         db.session.commit()
 
     def setUp(self):
@@ -65,7 +65,7 @@ class AppTestCase(LiveServerTestCase):
         assert u'לצורך הצבעה, בחר את המפלגה הרצויה' in self.browser.page_source
         # select party
         select = self.browser.find_element_by_class_name('form-check')
-        select.send_keys(u'עלה ירוק')
+        select.send_keys(self.yarok.id)
         select.send_keys(Keys.ENTER)
         assert u'האם ברצונך לאשר את הצבעתך' in self.browser.page_source
 
