@@ -62,7 +62,7 @@ class AppTestCase(LiveServerTestCase):
         id = self.browser.find_element_by_name('id')
         id.send_keys('678')
         id.send_keys(Keys.ENTER)
-        assert self.str not in self.browser.page_source
+        assert u'לצורך הצבעה, בחר את המפלגה הרצויה' in self.browser.page_source
         # select party
         select = self.browser.find_element_by_class_name('form-check')
         select.send_keys(u'עלה ירוק')
