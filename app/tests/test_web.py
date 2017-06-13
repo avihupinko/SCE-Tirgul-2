@@ -67,9 +67,10 @@ class AppTestCase(LiveServerTestCase):
         select = self.browser.find_element_by_class_name('form-check')
         select.send_keys(u'עלה ירוק')
         select.submit()
+        assert u'האם ברצונך לאשר את הצבעתך' in self.browser.page_source
 
         # confirm selected party
-        confirm = self.browser.find_element_by_css_selector('submit')
+        confirm = self.browser.find_element_by_class_name('submit')
         confirm.send_keys(u'אשר')
         confirm.submit()
 
