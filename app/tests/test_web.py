@@ -1,5 +1,6 @@
 import unittest
 
+from flask_login import current_user
 from flask_testing import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -52,8 +53,25 @@ class AppTestCase(LiveServerTestCase):
         id = self.browser.find_element_by_name('id')
         id.send_keys('678')
         id.send_keys(Keys.ENTER)
-        # self.browser.find_element_by_name("submit").click()
+
         assert self.str not in self.browser.page_source
+
+    def test_full_vote(self):
+        firstname = self.browser.find_element_by_name('first_name')
+        firstname.send_keys('yulia')
+        lastname = self.browser.find_element_by_name('last_name')
+        lastname.send_keys('zorin')
+        id = self.browser.find_element_by_name('id')
+        id.send_keys('678')
+        id.send_keys(Keys.ENTER)
+
+        yarok = self.browser.find_element_by_id(u'עלה ירוק')
+        yarok.click()
+        yarok.send_keys(Keys.ENTER)
+
+        confirm = self.browser.find_element_by_id('ok')
+        confirm.click()
+        assert None in current_user
 
 
     def test_user_not_in_database(self):
