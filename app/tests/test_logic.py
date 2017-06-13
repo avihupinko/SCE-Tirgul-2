@@ -33,7 +33,7 @@ class AppTestCase(unittest.TestCase):
         # check the error of user who's not in the database
         invalid_login = self.check.post('login', data=dict(first_name='avihu', last_name='pinko', id='987'))
         str = invalid_login.data.decode('utf-8')
-        assert '×”×ž×¦×‘×™×¢ ××™× ×• ×ž×•×¤×™×¢ ×‘×‘×¡×™×¡ ×”× ×ª×•× ×™× ××• ×©×›×‘×¨ ×”×¦×‘×™×¢' in str
+        assert u'המצביע אינו מופיע בבסיס הנתונים' in str
 
         # def test_false_user_name(self):
         #     # check the error of wrong name for valid id
