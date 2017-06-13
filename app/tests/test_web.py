@@ -67,11 +67,11 @@ class AppTestCase(LiveServerTestCase):
         select = self.browser.find_element_by_class_name('form-check')
         select.send_keys(u'עלה ירוק')
         select.submit()
-        # confirm = self.browser.find_element_by_id('ok')
-        # confirm.click()
+
         # confirm selected party
-        confirm = self.browser.find_element_by_id('ok')
-        confirm.click()
+        confirm = self.browser.find_element_by_class_name('submit')
+        confirm.send_keys(u'אשר')
+        confirm.submit()
         assert u'ברוכים הבאים למערכת הבחירות הממוחשבת' in self.browser.page_source
 
     def test_user_not_in_database(self):
