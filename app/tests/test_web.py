@@ -64,8 +64,9 @@ class AppTestCase(LiveServerTestCase):
         id.send_keys(Keys.ENTER)
         assert self.str not in self.browser.page_source
         # select party
-        yarok = self.browser.find_element_by_id(u'עלה ירוק')
-        yarok.send_keys(Keys.ENTER)
+        select = self.browser.find_element_by_class_name('form-check')
+        select.send_keys(u'עלה ירוק')
+        select.submit()
         # confirm = self.browser.find_element_by_id('ok')
         # confirm.click()
         # confirm selected party
