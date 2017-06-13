@@ -63,11 +63,12 @@ class AppTestCase(LiveServerTestCase):
         id = self.browser.find_element_by_name('id')
         id.send_keys('678')
         id.send_keys(Keys.ENTER)
-
+        # select party
         yarok = self.browser.find_element_by_id(u'עלה ירוק')
         yarok.click()
-        yarok.send_keys(Keys.ENTER)
-
+        confirm = self.browser.find_element_by_id('ok')
+        confirm.click()
+        # confirm selected party
         confirm = self.browser.find_element_by_id('ok')
         confirm.click()
         assert u'ברוכים הבאים למערכת הבחירות הממוחשבת' in self.browser.page_source
