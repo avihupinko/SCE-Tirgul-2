@@ -66,7 +66,7 @@ class AppTestCase(LiveServerTestCase):
         # select party
         select_elements = self.browser.find_elements_by_name('partyId')
         select_elements[0].submit()
-        self.browser.find_element_by_id('ok').click()
+        self.browser.find_element_by_class_name('submit').submit()
         assert u'האם ברצונך לאשר את הצבעתך' in self.browser.page_source
 
         # confirm selected party
