@@ -43,12 +43,11 @@ class AppTestCase(LiveServerTestCase):
             db.drop_all()
             db.session.remove()
 
-
     def test_getting_to_voting_page(self):
-        firstname = self.browser.find_element_by_name('first_name')
-        firstname.send_keys('yulia')
-        lastname = self.browser.find_element_by_name('last_name')
-        lastname.send_keys('zorin')
+        first_name = self.browser.find_element_by_name('first_name')
+        first_name.send_keys('yulia')
+        last_name = self.browser.find_element_by_name('last_name')
+        last_name.send_keys('zorin')
         id = self.browser.find_element_by_name('id')
         id.send_keys('678')
         id.send_keys(Keys.ENTER)
@@ -56,13 +55,14 @@ class AppTestCase(LiveServerTestCase):
         assert self.str not in self.browser.page_source
 
     def test_full_vote(self):
-        firstname = self.browser.find_element_by_name('first_name')
-        firstname.send_keys('yulia')
-        lastname = self.browser.find_element_by_name('last_name')
-        lastname.send_keys('zorin')
+        first_name = self.browser.find_element_by_name('first_name')
+        first_name.send_keys('yulia')
+        last_name = self.browser.find_element_by_name('last_name')
+        last_name.send_keys('zorin')
         id = self.browser.find_element_by_name('id')
         id.send_keys('678')
         id.send_keys(Keys.ENTER)
+        assert self.str not in self.browser.page_source
         # select party
         yarok = self.browser.find_element_by_id(u'עלה ירוק')
         yarok.click()
@@ -72,7 +72,6 @@ class AppTestCase(LiveServerTestCase):
         confirm = self.browser.find_element_by_id('ok')
         confirm.click()
         assert u'ברוכים הבאים למערכת הבחירות הממוחשבת' in self.browser.page_source
-
 
     def test_user_not_in_database(self):
         firstname = self.browser.find_element_by_name('first_name')
