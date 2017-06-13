@@ -65,9 +65,9 @@ class AppTestCase(LiveServerTestCase):
         assert self.str not in self.browser.page_source
         # select party
         yarok = self.browser.find_element_by_id(u'עלה ירוק')
-        yarok.click()
-        confirm = self.browser.find_element_by_id('ok')
-        confirm.click()
+        yarok.send_keys(Keys.ENTER)
+        # confirm = self.browser.find_element_by_id('ok')
+        # confirm.click()
         # confirm selected party
         confirm = self.browser.find_element_by_id('ok')
         confirm.click()
