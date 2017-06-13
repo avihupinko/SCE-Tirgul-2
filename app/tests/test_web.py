@@ -51,6 +51,8 @@ class AppTestCase(LiveServerTestCase):
         id = self.browser.find_element_by_name('id')
         id.send_keys('678')
         self.browser.find_element_by_name("submit").click()
+        assert self.str not in self.browser.page_source
+
 
     def test_user_not_in_database(self):
         firstname = self.browser.find_element_by_name('first_name')
@@ -61,7 +63,7 @@ class AppTestCase(LiveServerTestCase):
         id.send_keys('987')
         self.browser.find_element_by_name("submit").click()
         # check if user where able to enter parties page
-        self.assertIn(u'המצביע אינו מופיע בבסיס הנתונים', self.browser.find_element_by_class_name("error"))
+        assert self.str not in self.browser.page_source
 
 
 # Run tests if script was executed directly from the shell
