@@ -69,7 +69,7 @@ class AppTestCase(LiveServerTestCase):
         # select party
         input_elements = self.browser.find_elements_by_tag_name('input')
         input_elements[0].submit()
-        input_elements[len(input_elements)].click()
+        input_elements[len(input_elements) - 1].click()
 
         assert u'האם ברצונך לאשר את הצבעתך' in self.browser.page_source
 
