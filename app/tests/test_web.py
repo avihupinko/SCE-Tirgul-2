@@ -66,7 +66,7 @@ class AppTestCase(LiveServerTestCase):
         # select party
         # select_elements = self.browser.find_elements_by_name('partyId')
         # select_elements[0].submit()
-        select = self.browser.find_element_by_id('עלה ירוק')
+        select = self.browser.find_element_by_xpath("(//input[@name='partyId'])[0]")
         select.click()
         select.submit()
 
