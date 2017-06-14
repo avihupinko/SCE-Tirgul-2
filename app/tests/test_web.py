@@ -24,10 +24,13 @@ class AppTestCase(LiveServerTestCase):
 
     def insert_data_to_db(self):
         db.session.commit()
-        self.yulia = User('yulia', 'zorin', '678')
-        self.yarok = Party(u'עלה ירוק', 'https://pbs.twimg.com/profile_images/553476099775016960/8Ha40Qym_400x400.jpeg')
-        db.session.add(self.yarok)
-        db.session.add(self.yulia)
+        yulia = User('yulia', 'zorin', '678')
+        yarok = Party(u'עלה ירוק', 'https://pbs.twimg.com/profile_images/553476099775016960/8Ha40Qym_400x400.jpeg')
+        avoda = Party(u'העבודה',
+                      'https://www.am-1.org.il/wp-content/uploads/2015/03/%D7%94%D7%A2%D7%91%D7%95%D7%93%D7%94.-%D7%A6%D7%99%D7%9C%D7%95%D7%9D-%D7%99%D7%97%D7%A6.jpg')
+        db.session.add(yarok)
+        db.session.add(avoda)
+        db.session.add(yulia)
         db.session.commit()
 
     def setUp(self):
@@ -66,7 +69,7 @@ class AppTestCase(LiveServerTestCase):
         # select party
         input_elements = self.browser.find_elements_by_tag_name('input')
         input_elements[1].click()
-        input_elements[len(input_elements - 1)].submit()
+        # input_elements[len(input_elements - 1)].submit()
 
         assert u'האם ברצונך לאשר את הצבעתך' in self.browser.page_source
 
