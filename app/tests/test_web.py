@@ -64,9 +64,10 @@ class AppTestCase(LiveServerTestCase):
         id.send_keys(Keys.ENTER)
         assert u'לצורך הצבעה, בחר את המפלגה הרצויה' in self.browser.page_source
         # select party
-        select_element = self.browser.find_element_by_css_selector("form-check")
-        select_element.click()
-        select_element.submit()
+        selected = self.browser.find_element_by_class_name("party")
+        selected.click()
+        selected.submit()
+
         assert u'האם ברצונך לאשר את הצבעתך' in self.browser.page_source
 
         # confirm selected party
