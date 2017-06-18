@@ -73,11 +73,9 @@ class AppTestCase(LiveServerTestCase):
         assert u'האם ברצונך לאשר' in self.browser.page_source
 
         # confirm selected party
-        confirm = self.browser.find_elements_by_class_name('btn')
-        for i in confirm:
-            print(i.id)
+        self.browser.find_elements_by_class_name('btn')[1].submit()
 
-        assert u'לצורך הצבעה, בחר את המפלגה הרצויה' in self.browser.page_source
+        assert u'לצורך הצבעה, בחר את המפלגה הרצויה' not in self.browser.page_source
         assert u'ברוכים הבאים' in self.browser.page_source
 
     def test_user_not_in_database(self):
