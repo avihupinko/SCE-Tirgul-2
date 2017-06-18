@@ -68,7 +68,7 @@ class AppTestCase(LiveServerTestCase):
         assert u'לצורך הצבעה, בחר את המפלגה הרצויה' in self.browser.page_source
         # select party
         self.browser.find_element_by_tag_name('img').submit()
-        self.browser.find_element_by_class_name('btn').submit()
+        # self.browser.find_element_by_class_name('btn').submit()
 
         assert u'האם ברצונך לאשר את הצבעתך' in self.browser.page_source
 
