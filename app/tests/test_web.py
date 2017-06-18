@@ -38,7 +38,7 @@ class AppTestCase(LiveServerTestCase):
         self.browser = webdriver.PhantomJS()
         # nevigate to the application home page
         self.browser.get(self.get_server_url())
-        self.str = '×”×ž×¦×‘×™×¢ ××™× ×• ×ž×•×¤×™×¢ ×‘×‘×¡×™×¡ ×”× ×ª×•× ×™× ××• ×©×›×‘×¨ ×”×¦×‘×™×¢'
+        self.str = u'לצורך הצבעה, בחר את המפלגה הרצויה'
 
     def tearDown(self):
         self.browser.quit()
@@ -57,25 +57,25 @@ class AppTestCase(LiveServerTestCase):
 
         assert self.str not in self.browser.page_source
 
-    # def test_full_vote(self):
-    #     first_name = self.browser.find_element_by_name('first_name')
-    #     first_name.send_keys('yulia')
-    #     last_name = self.browser.find_element_by_name('last_name')
-    #     last_name.send_keys('zorin')
-    #     id = self.browser.find_element_by_name('id')
-    #     id.send_keys('678')
-    #     id.send_keys(Keys.ENTER)
-    #     assert u'לצורך הצבעה, בחר את המפלגה הרצויה' in self.browser.page_source
-    #     # select party
-    #     self.browser.find_element_by_tag_name('img').click()
-    #     self.browser.find_element_by_class_name('btn').submit()
-    #
-    #     assert u'האם ברצונך לאשר' in self.browser.page_source
-    #
-    #     # confirm selected party
-    #     self.browser.find_element_by_id('ok').click()
-    #
-    #     assert u'ברוכים הבאים' in self.browser.page_source
+    def test_full_vote(self):
+        first_name = self.browser.find_element_by_name('first_name')
+        first_name.send_keys('yulia')
+        last_name = self.browser.find_element_by_name('last_name')
+        last_name.send_keys('zorin')
+        id = self.browser.find_element_by_name('id')
+        id.send_keys('678')
+        id.send_keys(Keys.ENTER)
+        assert self.str in self.browser.page_source
+        # select party
+        self.browser.find_element_by_tag_name('img').click()
+        self.browser.find_element_by_class_name('btn').submit()
+
+        assert u'האם ברצונך לאשר' in self.browser.page_source
+
+        # confirm selected party
+        self.browser.find_element_by_id('ok').click()
+
+        assert u'ברוכים הבאים' in self.browser.page_source
 
     def test_user_not_in_database(self):
         firstname = self.browser.find_element_by_name('first_name')
