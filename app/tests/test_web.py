@@ -73,7 +73,7 @@ class AppTestCase(LiveServerTestCase):
         assert u'האם ברצונך לאשר' in self.browser.page_source
 
         # confirm selected party
-        confirm = self.browser.find_elements_by_class_name('btn')[1].submit()
+        confirm = self.browser.find_elements_by_class_name('btn')[0].submit()
 
         assert u'ברוכים הבאים למערכת הבחירות הממוחשבת' in self.browser.page_source
 
