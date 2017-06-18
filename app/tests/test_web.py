@@ -74,8 +74,9 @@ class AppTestCase(LiveServerTestCase):
 
         # confirm selected party
         self.browser.find_element_by_id('ok').submit()
-        self.browser.save_screenshot('submit.png')
+
         assert u'לצורך הצבעה, בחר את המפלגה הרצויה' not in self.browser.page_source
+        assert u'האם ברצונך לאשר' not in self.browser.page_source
         assert u'ברוכים הבאים' in self.browser.page_source
 
     def test_user_not_in_database(self):
