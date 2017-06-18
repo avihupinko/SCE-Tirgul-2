@@ -38,7 +38,7 @@ class AppTestCase(LiveServerTestCase):
         self.browser = webdriver.PhantomJS()
         # nevigate to the application home page
         self.browser.get(self.get_server_url())
-        self.str = u'לצורך הצבעה, בחר את המפלגה הרצויה'
+        self.str = '×”×ž×¦×‘×™×¢ ××™× ×• ×ž×•×¤×™×¢ ×‘×‘×¡×™×¡ ×”× ×ª×•× ×™× ××• ×©×›×‘×¨ ×”×¦×‘×™×¢'
 
     def tearDown(self):
         self.browser.quit()
@@ -65,7 +65,7 @@ class AppTestCase(LiveServerTestCase):
         id = self.browser.find_element_by_name('id')
         id.send_keys('678')
         id.send_keys(Keys.ENTER)
-        assert self.str in self.browser.page_source
+        assert u'לצורך הצבעה, בחר את המפלגה הרצויה' in self.browser.page_source
         # select party
         self.browser.find_element_by_tag_name('img').click()
         self.browser.find_element_by_class_name('btn').submit()
