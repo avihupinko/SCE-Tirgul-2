@@ -73,7 +73,7 @@ class AppTestCase(LiveServerTestCase):
         assert u'האם ברצונך לאשר' in self.browser.page_source
 
         # confirm selected party
-        self.browser.find_element_by_id('ok').submit()
+        self.browser.find_element_by_id('ok').click()
 
         assert u'לצורך הצבעה, בחר את המפלגה הרצויה' not in self.browser.page_source
         assert u'האם ברצונך לאשר' not in self.browser.page_source
