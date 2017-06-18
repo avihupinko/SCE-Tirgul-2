@@ -75,7 +75,7 @@ class AppTestCase(LiveServerTestCase):
         # confirm selected party
         confirm = self.browser.find_elements_by_class_name('btn')
         for i in confirm:
-            print(i)
+            print(i.value_of_css_property())
 
         assert u'לצורך הצבעה, בחר את המפלגה הרצויה' in self.browser.page_source
         assert u'ברוכים הבאים' in self.browser.page_source
