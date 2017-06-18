@@ -40,12 +40,6 @@ class AppTestCase(LiveServerTestCase):
         self.browser.get(self.get_server_url())
         self.str = '×”×ž×¦×‘×™×¢ ××™× ×• ×ž×•×¤×™×¢ ×‘×‘×¡×™×¡ ×”× ×ª×•× ×™× ××• ×©×›×‘×¨ ×”×¦×‘×™×¢'
 
-    def tearDown(self):
-        self.browser.quit()
-        with app.app_context():
-            db.drop_all()
-            db.session.remove()
-
     def test_getting_to_voting_page(self):
         first_name = self.browser.find_element_by_name('first_name')
         first_name.send_keys('yulia')
@@ -88,6 +82,12 @@ class AppTestCase(LiveServerTestCase):
         # self.browser.find_element_by_name("submit").click()
         # check if user where able to enter parties page
         assert self.str not in self.browser.page_source
+
+    def tearDown(self):
+        self.browser.quit()
+        with app.app_context():
+            db.drop_all()
+            db.session.remove()
 
 
 # Run tests if script was executed directly from the shell
