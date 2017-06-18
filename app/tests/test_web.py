@@ -73,8 +73,7 @@ class AppTestCase(LiveServerTestCase):
         assert u'האם ברצונך לאשר' in self.browser.page_source
 
         # confirm selected party
-        confirm = self.browser.find_elements_by_name('btn')[1].submit()
-
+        self.browser.find_elements_by_class_name('btn')[0].submit()
         assert u'ברוכים הבאים' in self.browser.page_source
 
     def test_user_not_in_database(self):
