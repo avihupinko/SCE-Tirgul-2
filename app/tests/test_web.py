@@ -56,9 +56,9 @@ class AppTestCase(LiveServerTestCase):
         first_name.send_keys('yulia')
         last_name = self.browser.find_element_by_name('last_name')
         last_name.send_keys('zorin')
-        id = self.browser.find_element_by_name('id')
-        id.send_keys('678')
-        id.send_keys(Keys.ENTER)
+        Id = self.browser.find_element_by_name('id')
+        Id.send_keys('678')
+        Id.send_keys(Keys.ENTER)
         assert u'לצורך הצבעה, בחר את המפלגה הרצויה' in self.browser.page_source
         # select party
         self.browser.find_element_by_tag_name('img').click()
@@ -72,13 +72,13 @@ class AppTestCase(LiveServerTestCase):
         assert u'ברוכים הבאים' in self.browser.page_source
 
     def test_user_not_in_database(self):
-        firstname = self.browser.find_element_by_name('first_name')
-        firstname.send_keys('yulia')
-        lastname = self.browser.find_element_by_name('last_name')
-        lastname.send_keys('zorin')
-        id = self.browser.find_element_by_name('id')
-        id.send_keys('987')
-        id.send_keys(Keys.ENTER)
+        first_name = self.browser.find_element_by_name('first_name')
+        first_name.send_keys('yulia')
+        last_name = self.browser.find_element_by_name('last_name')
+        last_name.send_keys('zorin')
+        Id = self.browser.find_element_by_name('id')
+        Id.send_keys('987')
+        Id.send_keys(Keys.ENTER)
         # self.browser.find_element_by_name("submit").click()
         # check if user where able to enter parties page
         assert self.str not in self.browser.page_source
