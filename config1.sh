@@ -18,7 +18,7 @@ cd SCE-Tirgul-2
 sudo pip install -r requirements.txt
 
 #create db
-#python db_create.py
+python db_create.py
 
 #redirects all traffic from port 80 to 5000
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 5000
